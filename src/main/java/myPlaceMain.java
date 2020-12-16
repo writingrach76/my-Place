@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.Scanner;
 
 public class myPlaceMain {
     //used to connect to the database being used
@@ -15,7 +16,8 @@ public class myPlaceMain {
     private static void doConsoleTest()
     {
         Scanner in = new Scanner(System.in);
-        String input = in.getLine();
+        System.out.println("What would you like to do today?");
+        String input = in.nextLine();
         while(!input.equals("exit"))
         {
             if(input.equals("signup"))
@@ -24,9 +26,11 @@ public class myPlaceMain {
             }
             else if(input.equals("login"))
             {
-                System.out.print("Username: ");
-                String u = in.getLine();
-                loginUser();
+                System.out.println("Username: ");
+                String u = in.nextLine();
+                System.out.println("Password: ");
+                String p = in.nextLine();
+                loginUser(u, p);
             }
             else if(input.equals("newpost"))
             {
@@ -40,7 +44,8 @@ public class myPlaceMain {
             {
                 System.out.println("That's not a valid command. Try again.");
             }
-            input = in.getLine();
+            System.out.println("What now?");
+            input = in.nextLine();
         }
     }
 
@@ -58,6 +63,32 @@ public class myPlaceMain {
      */
     private static void signUpUser()
     {
+        Scanner in = new Scanner(System.in);
+        System.out.println("Welcome! First give us your name (no middle names please! only first & last): ");
+        String[] n = in.nextLine().split(" ");
+        System.out.println("Now, the username you'd like to use: ");
+        String u = in.nextLine();
+        System.out.println("And now the password: ");
+        String p = in.nextLine();
+        String p1 = "";
+       do{
+            System.out.println("Confirm the password: ");
+            p1 = in.nextLine();
+        }
+        while(!p.equals(p1));
+
+        System.out.println("trying...");
+
+        try
+        {
+            System.out.println("entering your info!");
+            queryDatabase("USE [myPlaceDB].[dbo]" + "\n"+"INSERT INTO [myPlaceDB].[dbo].[myUser] VALUES('" + u + "', '" + p +"', '" + n[0] + "'");
+        }
+        catch(SQLException e)
+        {
+            System.out.println("SQL issue :(");
+            e.printStackTrace();
+        }
 
     }
 

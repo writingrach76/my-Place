@@ -11,4 +11,7 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    //compile "com.oracle.ojdbc:ojdbc8:19.3.0.0"
+    //compile files('D:\\Downloads 2.0\\sqljdbc_8.4.1.0_enu\\sqljdbc_8.4\\enu\\mssql-jdbc-8.4.1.jre8')
+    runtime files("mssql-jdbc-8.4.1.jre8.jar")
 }
