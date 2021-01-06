@@ -22,11 +22,18 @@ CREATE TABLE Users (
 CREATE TABLE UserPosts (
 	postID INT IDENTITY(1,1) PRIMARY KEY,
 	userName VARCHAR(25) FOREIGN KEY REFERENCES myUser(userName),
-	postContent VARCHAR(150) NOT NULL
+	postContent VARCHAR(MAX) NOT NULL
 )
 
 
 -- Will show everything in myUser table, for testing purposes
-SELECT userName, userPass, firstName, lastName
+SELECT *
 FROM myUser
 
+SELECT *
+FROM Users
+
+USE [myPlaceDB]
+INSERT INTO myUSER (userName, userPass, firstName, lastName) VALUES ('testuser', 'testuser', 'test', 'user')
+
+DELETE FROM myUser where userName = 'testuser'
